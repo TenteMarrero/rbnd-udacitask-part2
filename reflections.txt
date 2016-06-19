@@ -1,13 +1,18 @@
 # What you added to Udacitask 2.0
 # -------------------------------------------------------
 1. What is the gem of your choice and how did you use it?
+I picked Terminal Table and used it to print the UdaciList (print_table method)
 2. Describe the 2 features you added to the project.
-  a) Feature 1...
-  b) Feature 2...
+  a) New item type email. Pretty similar to type link
+  b) Delete multiple items. User can provide any number of indexes and the functionlaity will check their validity prior deleting all of them
 
 # REFLECTIONS
 # -------------------------------------------------------
 1. How long did you spend working on this project?
+Around 3 hours
 2. What was the most rewarding challenge you conquered?
+Refactoring the code for the new changes
 3. What two additional features did you build? Why?
+See above. I picked new item type because it is interesting how to scale the app. And I picked delete multiple items because I wanted to use a method that can receive any number of arguments of the same type.
 4. Where do you still have room to grow?
+Refactoring and learning more gems
