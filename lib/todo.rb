@@ -1,25 +1,19 @@
 class TodoItem
   include Listable
+  include UdaciListErrors
   attr_reader :description, :due, :priority
 
   def initialize(description, options={})
     @description = description
     @due = options[:due] ? Date.parse(options[:due]) : options[:due]
+    unless is_valid_priority?(options[:priority])
+      raise UdaciListErrors::InvalidPriorityValue, "Priority '#{options[:priority]}' is not supported"
+    end
     @priority = options[:priority]
   end
-  def format_date
-    @due ? @due.strftime("%D") : "No due date"
-  end
-  def format_priority
-    value = " ⇧" if @priority == "high"
-    value = " ⇨" if @priority == "medium"
-    value = " ⇩" if @priority == "low"
-    value = "" if !@priority
-    return value
-  end
   def details
-    format_description(@description) + "due: " +
-    format_date +
-    format_priority
+    format_description(@description) +
+    format_date(end_date: @due) +
+    format_priority(@priority)
   end
 end
