@@ -52,5 +52,5 @@ new_list.add("email", "tente.marrero@gmail.com", name: "Vicente Marrero")
 new_list.all
 
 #Feature test: delete multiple indexes
-new_list.delete(3, 4, 5)
+new_list.delete(5, 1, 9)
 new_list.all

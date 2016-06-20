@@ -10,13 +10,14 @@ class UdaciList
   def add(type, description, options={})
     type = type.downcase
     check_valid_type(type)
-    @items.push TodoItem.new(description, options) if type == "todo"
-    @items.push EventItem.new(description, options) if type == "event"
-    @items.push LinkItem.new(description, options) if type == "link"
-    @items.push EmailItem.new(description, options) if type == "email"
+    allowed_types = { todo: TodoItem, link: LinkItem, event: EventItem, email: EmailItem }
+    # Another option: set allowed_types as a class variable, but that will mean you will need to use 'require'
+    # for each item at the top of the file as well. If done that way, the requires aren't necessary in app.rb
+    @items.push allowed_types[type.to_sym].new description, options
   end
   def delete(*indexes)
     if are_indexes_valid? indexes
+      indexes.sort! { |x,y| y <=> x }
       indexes.each {|index| @items.delete_at(index - 1)}
     end
   end
@@ -42,7 +43,8 @@ class UdaciList
     end
   end
   def is_valid_type?(type)
-    type == "todo" || type == "event" || type == "link" || type == "email"
+    types = ['todo', 'event', 'link', 'email']
+    types.include? type
   end
   def valid_index?(index)
     @items.length >= index
